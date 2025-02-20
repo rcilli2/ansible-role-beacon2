@@ -1,0 +1,21 @@
+---
+# tasks file for ansible-beacon2
+- name: Clone Beacon-ri-api Directory
+  include_tasks: clone_beacon_ri_api.yml
+
+#- name: Start containers
+#  include_tasks: start_containers.yml
+
+#- name: Clean MongoDB
+#  include_tasks: clean_mongodb.yml
+
+#- name: Copy JSON files to MongoDB container
+#  include_tasks: copy_json_files.yml
+
+#- name: Import data into MongoDB
+#  include_tasks: import_mongodb.yml
+
+#- name: Run Python scripts
+#  include_tasks: run_python_scripts.yml
+
+

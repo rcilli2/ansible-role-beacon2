@@ -1,0 +1,27 @@
+---
+- name: Copy JSON files to MongoDB container
+  community.docker.docker_container_copy_into:
+    container: "{{ mongo_container }}"
+    path: "{{ item.path }}"
+    container_path: "/tmp/{{ item.name }}"
+  loop:
+    - { path: "{{ datasets }}", name: "datasets.json" }
+    - { path: "{{ individuals }}", name: "individuals.json" }
+    - { path: "{{ cohorts }}", name: "cohorts.json" }
+    - { path: "{{ analyses }}", name: "analyses.json" }       
+    - { path: "{{ biosamples }}", name: "biosamples.json" }
+    - { path: "{{ runs }}", name: "runs.json" }
+    - { path: "{{ genomic_variations }}", name: "genomicVariations.json" }
+
+#---
+#- name: Copy JSON files to MongoDB container
+#  command: >
+#    docker cp {{ item.path }} {{ mongo_container }}:/tmp/{{ item.name }}
+#  loop:
+#    - { path: "{{ datasets }}", name: "datasets.json" }
+#    - { path: "{{ individuals }}", name: "individuals.json" }
+#    - { path: "{{ cohorts }}", name: "cohorts.json" }
+#    - { path: "{{ analyses }}", name: "analyses.json" }
+#    - { path: "{{ biosamples }}", name: "biosamples.json" }
+#    - { path: "{{ runs }}", name: "runs.json" }
+#    - { path: "{{ genomic_variations }}", name: "genomicVariations.json" }

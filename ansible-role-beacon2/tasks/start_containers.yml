@@ -1,0 +1,26 @@
+---
+- name: Start Docker containers using Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ docker_compose_file | dirname }}"  # Path to the directory containing docker-compose.yml
+    files:
+      - "{{ docker_compose_file }}"  # Path to the docker-compose file
+    state: present
+    build: always
+    services:
+      - beacon
+      - permissions
+      - db
+
+- name: Wait for services to stabilize
+  ansible.builtin.pause:
+    seconds: 10
+
+
+#---
+#- name: Start Docker containers
+#  command: >
+#    docker compose -f {{docker_compose_file}} up -d --build beacon permissions db
+
+#- name: Wait for services to stabilize
+#  ansible.builtin.pause:
+#    seconds: 10

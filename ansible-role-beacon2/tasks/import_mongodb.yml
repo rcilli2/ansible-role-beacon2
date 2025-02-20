@@ -1,0 +1,27 @@
+---
+- name: Import JSON data into MongoDB
+  community.docker.docker_container_exec:
+    container: "{{ mongo_container }}"
+    command: >
+      mongoimport --jsonArray --uri {{ mongo_uri }} --file /tmp/{{ item.name }} --collection {{ item.collection }}
+  loop:
+    - { name: "datasets.json", collection: "dataset" }
+    - { name: "individuals.json", collection: "individuals" }
+    - { name: "cohorts.json", collection: "cohorts" }
+    - { name: "analyses.json", collection: "analyses" }
+    - { name: "biosamples.json", collection: "biosamples" }
+    - { name: "runs.json", collection: "runs" }
+    - { name: "genomicVariations.json", collection: "genomicVariations" }
+
+#---
+#- name: Import JSON data into MongoDB
+#  command: >
+#    docker exec {{ mongo_container }} mongoimport --jsonArray --uri {{ mongo_uri }} --file /tmp/{{ item.name }} --collection {{ item.collection }}
+#  loop:
+#    - { name: "datasets.json", collection: "dataset" }
+#    - { name: "individuals.json", collection: "individuals" }
+#    - { name: "cohorts.json", collection: "cohorts" }
+#    - { name: "analyses.json", collection: "analyses" }
+#    - { name: "biosamples.json", collection: "biosamples" }
+#    - { name: "runs.json", collection: "runs" }
+#    - { name: "genomicVariations.json", collection: "genomicVariations" }

@@ -1,0 +1,29 @@
+---
+- name: Remove old MongoDB records
+  community.docker.docker_container_exec:
+    container: "{{ mongo_container }}"
+    command: >
+      mongo beacon -u root -p example --authenticationDatabase admin --eval "db.{{ item }}.deleteMany({})"
+  loop:
+    - filtering_terms
+    - analyses
+    - biosamples
+    - cohorts
+    - datasets
+    - genomicVariations
+    - individuals
+    - runs
+
+#---
+#- name: Remove old MongoDB records
+#  shell: |
+#    docker exec {{ mongo_container }} /bin/bash -c 'mongo beacon -u root -p example --authenticationDatabase admin --eval "db.{{ item }}.deleteMany({})" '
+#  loop:
+#    - filtering_terms
+#    - analyses
+#    - biosamples
+#    - cohorts
+#    - datasets
+#    - genomicVariations
+#    - individuals
+#    - runs

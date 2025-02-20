@@ -1,0 +1,48 @@
+---
+#Project Name
+project_name: beacon2-ri-api
+
+# path 
+path: "/data/"
+
+#URL to the Github Project beacon-ri-api
+repo_url: "https://github.com/EGA-archive/{{ project_name }}.git"
+
+#Destination Path (where to clone the directory)
+dest_path: "{{ path }}{{ project_name }}/" 
+
+# defaults file for ansible-beacon2
+data_path: "{{ dest_path }}deploy/data/"
+
+# File names
+datasets_file: "datasets.json"
+individuals_file: "individuals.json"
+cohorts_file: "cohorts.json"
+analyses_file: "analyses.json"
+biosamples_file: "biosamples.json"
+runs_file: "runs.json"
+genomic_variations_file: "genomicVariations.json"
+
+# Full paths
+datasets: "{{ data_path }}{{ datasets_file }}"
+individuals: "{{ data_path }}{{ individuals_file }}"
+cohorts: "{{ data_path }}{{ cohorts_file }}"
+analyses: "{{ data_path }}{{ analyses_file }}"
+biosamples: "{{ data_path }}{{ biosamples_file }}"
+runs: "{{ data_path }}{{ runs_file }}"
+genomic_variations: "{{ data_path }}{{ genomic_variations_file }}"
+
+mongo_container: "rimongo"
+#mongo_uri: "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin"
+# MongoDB Configuration
+mongo_user: "root"
+mongo_password: "example"
+mongo_host: "127.0.0.1"
+mongo_port: 27017
+mongo_database: "beacon"
+mongo_auth_db: "admin"
+mongo_uri: "mongodb://{{ mongo_user }}:{{ mongo_password }}@{{ mongo_host }}:{{ mongo_port }}/{{ mongo_database }}?authSource={{ mongo_auth_db }}"
+
+
+# Docker compose settings
+docker_compose_file: "{{ dest_path }}deploy/docker-compose.yml"
