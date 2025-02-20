@@ -1,0 +1,26 @@
+---
+- name: Test Ansible Beacon
+  hosts: localhost
+  remote_user: root
+  connection: local
+  roles:
+    - role: /data/beacon2-ri-api/deploy/ansible-beacon2
+  tasks:
+    - name: Print debug Message
+      debug:
+        msg: "Ansible beacon test running"
+
+    #- name: Avvia MongoDB con Docker
+    #  import_tasks: ../tasks/start_containers.yml
+
+    #- name: Pulizia del database MongoDB
+    #  import_tasks: ../tasks/clean_mongodb.yml
+
+    #- name: Copia i JSON nel container
+    #  import_tasks: ../tasks/copy_json_files.yml
+
+    #- name: Importa i dati nel MongoDB
+    #  import_tasks: ../tasks/import_mongodb.yml
+
+    #- name: Esegui Script Python
+    #  import_tasks: ../tasks/run_python_scripts.yml
